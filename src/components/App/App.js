@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "./App.module.css";
+import React, { useState } from 'react';
+import styles from './App.module.css';
 
-import BusinessList from "../BusinessList/BusinessList";
-import SearchBar from "../SearchBar/SearchBar";
-import search from "../../utils/yelpApi";
+import BusinessList from '../BusinessList/BusinessList';
+import SearchBar from '../SearchBar/SearchBar';
+import search from '../../utils/yelpApi';
 
 // const business = {
 //   imageSrc:
@@ -18,12 +18,12 @@ import search from "../../utils/yelpApi";
 //   reviewCount: 90,
 // };
 
-var businesses = [];
-
 const App = () => {
+  const [businesses, setBusinesses] = useState([]);
   const searchYelp = async (term, location, sortBy) => {
     console.log(`Searching Yelp with ${term}, ${location}, ${sortBy}`);
-    businesses = await search(term, location, sortBy);
+    const businesses = await search(term, location, sortBy);
+    setBusinesses(businesses);
   };
 
   return (
